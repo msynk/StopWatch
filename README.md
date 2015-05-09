@@ -1,2 +1,3 @@
 # StopWatch
-A simple class for measuring execution time in javascript
+A simple class for measuring execution time in javascript.
+Developed with js & ts in VSCode.

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fa">
+<head>
+	<title>Stopwatch test</title>
+	<script src='Stopwatch.js'></script>
+	<script>
+		var arr = [],
+		map = function(collection, callback){
+			var mapped = [];
+			for(var i = 0; i < collection.length; i++){
+				var item = collection[i];
+				if(callback(item)){
+					mapped.push(item);
+				}
+			}
+			return mapped;
+		},
+		callback = function(item){
+			return item.toString();
+		};
+		
+		
+		for(var i = 0; i < 10000000; i++){
+			arr[i] = i;
+		};
+		
+			//setTimeout(function(){
+			var sw = Stopwatch.startNew();
+			map(arr, callback);
+			sw.stop();
+			
+			console.log('custom: ' + sw.elapsedMilliseconds);
+		//}, 0);
+		
+		//setTimeout(function(){
+			sw.restart();
+			arr.map(callback);
+			sw.stop();
+			
+			console.log('built-in: ' + sw.elapsedMilliseconds);
+		//}, 0);
+		
+		
+	</script>
+</head>
+<body>
+	<h1>Test</h1>
+</body>
+</html>

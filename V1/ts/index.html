@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="fa">
 <head>
-	<title>test</title>
-	<script src='StopWatch.js'></script>
+	<title>Stopwatch.ts test</title>
+	<script src='Stopwatch.js'></script>
 	<script>
 		var arr = [];
-		var stopWatch = new StopWatch();
+		var stopWatch = new Stopwatch();
 		
 		var map = function(collection, callback){
 			var mapped = [];
@@ -27,26 +27,22 @@
 			arr[i] = i;
 		};
 		
-			setTimeout(function(){
-			stopWatch.start();
+			var sw = Stopwatch.startNew();
 			map(arr, callback);
-			stopWatch.stop();
+			sw.stop();
 			
-			console.log('custom: ' + stopWatch.elapsedMilliseconds);
-		}, 0);
+			console.log('custom: ' + sw.elapsedMilliseconds);
 		
-		setTimeout(function(){
-			stopWatch.start();
+			sw.restart();
 			arr.map(callback);
-			stopWatch.stop();
+			sw.stop();
 			
-			console.log('built-in: ' + stopWatch.elapsedMilliseconds);
-		}, 0);
+			console.log('built-in: ' + sw.elapsedMilliseconds);
 		
 		
 	</script>
 </head>
 <body>
-	<h1>Test</h1>
+	<h1>TypeScript Test</h1>
 </body>
 </html>

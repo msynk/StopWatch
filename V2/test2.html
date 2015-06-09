@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fa">
+	<head>
+		<title>test2</title>
+		<script src='Stopwatch2.js'></script>
+		<script>
+			function start(el) {
+				
+				el.disabled = true;
+				el.innerText = 'running...';
+				
+				var arr = [],
+					sw2 = new Stopwatch2();
+				
+				var map = function(collection, callback){
+					var mapped = [];
+					for(var i = 0; i < collection.length; i++){
+						var item = collection[i];
+						if(callback(item)){
+							mapped.push(item);
+						}
+					}
+					return mapped;
+				};
+				
+				var callback = function(item){
+					return item.toString();
+				};
+				
+				// ---------------------------------------------------------
+				
+				setTimeout(function() {
+				
+					console.log('start');
+					
+					for(var i = 0; i < 10000000; i++){
+						arr[i] = i;
+					};
+					
+					console.log('start1: ' + sw2.start() + ' ms');
+					map(arr, callback);
+					console.log('end1: ' + sw2.stop() + ' ms');
+					console.log('custom: ' + sw2.elapsedMilliseconds + ' ms');
+					
+					console.log('start2: ' + sw2.start() + ' ms');
+					arr.map(callback);
+					console.log('end2: ' + sw2.stop() + ' ms');
+					console.log('built-in: ' + sw2.elapsedMilliseconds + ' ms');
+					
+					console.log('end');
+					
+					el.disabled = false;
+					el.innerText = 'Run';
+					
+				}, 1);
+				
+				
+			};
+		
+		</script>
+	</head>
+	<body>
+		<h1>Test2</h1>
+		<button onclick="start(this)">Run</button>
+	</body>
+
+</html>

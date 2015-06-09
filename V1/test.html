@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fa">
+	<head>
+		<title>test</title>
+		<script src='Stopwatch.js'></script>
+		<script>
+			var iteration = 0,
+				arr = [],
+				stopWatch = new Stopwatch();
+			
+			function map (collection, callback) {
+				var mapped = [];
+				for(var i = 0; i < collection.length; i++){
+					var item = collection[i];
+					if(callback(item)){
+						mapped.push(item);
+					}
+				}
+				return mapped;
+			}			
+			function callback(item) {
+				return item.toString();
+			}
+			
+			function appendResult(value) {
+				var el = document.getElementById('divResults');
+				
+				el.innerHTML += value + '<br>';
+			}
+			
+			
+			function run(el) {
+				
+				el.disabled = true;
+				el.innerText = 'Running...';
+				iteration++;
+				
+				
+				appendResult('iteration ' + iteration + ' :');
+				
+				setTimeout(function() {
+					
+					for(var i = 0; i < 10000000; i++){
+						arr[i] = i;
+					};
+					
+					stopWatch.start();
+					map(arr, callback);
+					stopWatch.stop();
+					var e1 = stopWatch.elapsedMilliseconds;
+					
+				
+					stopWatch.start();
+					arr.map(callback);
+					stopWatch.stop();
+					var e2 = stopWatch.elapsedMilliseconds;
+					
+					appendResult('custom: ' + e1 + ' ms');
+					appendResult('built-in: ' + e2 + ' ms');
+					appendResult('------------------------------------------');
+					
+					el.disabled = false;
+					el.innerText = 'Run';
+					
+				}, 0);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Test</h1>
+		<button onclick="run(this)">Run</button>
+		<hr/>
+		<div id='divResults'></div>
+	</body>
+
+</html>
